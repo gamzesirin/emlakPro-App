@@ -1,3 +1,5 @@
+import Image from 'next/image'
+
 export default function Blog() {
 	const posts = [
 		{
@@ -31,11 +33,13 @@ export default function Blog() {
 				<div className="grid md:grid-cols-3 gap-8">
 					{posts.map((post, index) => (
 						<div key={index} className="group">
-							<div className="relative overflow-hidden rounded-lg mb-4">
-								<img
+							<div className="relative overflow-hidden rounded-lg mb-4 h-64">
+								<Image
 									src={post.image}
 									alt={post.title}
-									className="w-full h-64 object-cover transform group-hover:scale-110 transition-transform duration-500"
+									width={400}
+									height={256}
+									className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500"
 								/>
 							</div>
 							<p className="text-slate-500 text-sm mb-2">{post.date}</p>
