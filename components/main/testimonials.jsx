@@ -6,24 +6,25 @@ import { useState, useEffect } from 'react'
 const testimonials = [
 	{
 		content:
-			"This is required when, for example, the final text is not yet available. Dummy text is also known as 'fill text'.",
-		author: 'Calvin Carlo',
-		position: 'Manager',
-		image: '/images/ev1.jpg'
+			'EmlakPro ile çalışmak, gayrimenkul alım-satım sürecimizi çok kolaylaştırdı. Profesyonel ve güvenilir bir ekip.',
+		author: 'Ahmet Yılmaz',
+		initials: 'AY',
+		position: 'Müşteri',
+		rating: 5
 	},
 	{
-		content:
-			"This is required when, for example, the final text is not yet available. Dummy text is also known as 'fill text'.",
-		author: 'Christa Smith',
-		position: 'Designer',
-		image: '/images/ev1.jpg'
+		content: 'İzmirdeki en iyi gayrimenkul danışmanlık hizmetini aldım. Her şey çok hızlı ve sorunsuz ilerledi.',
+		author: 'Elif Demir',
+		initials: 'ED',
+		position: 'Müşteri',
+		rating: 5
 	},
 	{
-		content:
-			"This is required when, for example, the final text is not yet available. Dummy text is also known as 'fill text'.",
-		author: 'Jemina CLone',
-		position: 'Developer',
-		image: '/images/ev1.jpg'
+		content: 'EmlakPro ekibi, ihtiyaçlarımıza uygun en iyi seçenekleri sundu. Kesinlikle tavsiye ederim.',
+		author: 'Mehmet Kaya',
+		initials: 'MK',
+		position: 'Müşteri',
+		rating: 5
 	}
 ]
 
@@ -33,59 +34,59 @@ export default function Testimonials() {
 	useEffect(() => {
 		const timer = setInterval(() => {
 			setCurrentSlide((prev) => (prev + 1) % testimonials.length)
-		}, 5000) // Her 5 saniyede bir değişir
-
+		}, 5000)
 		return () => clearInterval(timer)
 	}, [])
 
 	return (
-		<section className="py-20 bg-slate-50 dark:bg-slate-800">
+		<section className="py-20 bg-gradient-to-b from-white to-slate-50 dark:from-slate-900 dark:to-slate-800">
 			<div className="container px-4 mx-auto">
-				<div className="text-center max-w-2xl mx-auto mb-16">
-					<h2 className="text-3xl font-bold mb-4 text-slate-900 dark:text-slate-100">What Our Users Say</h2>
-					<p className="text-slate-500 dark:text-slate-400">
-						Start working with Techwind that can provide everything you need to generate awareness, drive traffic,
-						connect.
-					</p>
+				<div className="flex flex-col items-center mb-12">
+					<span className="text-indigo-600 font-medium mb-2">Müşteri Yorumları</span>
+					<h2 className="text-3xl font-bold text-slate-900 dark:text-white">Müşterilerimiz Ne Diyor?</h2>
 				</div>
 
-				<div className="relative max-w-3xl mx-auto">
-					<div className="overflow-hidden">
+				<div className="max-w-4xl mx-auto">
+					<div className="relative overflow-hidden">
 						<div
-							className="transition-transform duration-500 ease-in-out"
+							className="flex transition-transform duration-500 ease-in-out"
 							style={{ transform: `translateX(-${currentSlide * 100}%)` }}
 						>
-							<div className="flex">
-								{testimonials.map((testimonial, index) => (
-									<div key={index} className="w-full flex-shrink-0 bg-white dark:bg-slate-900 p-8 rounded-lg shadow-sm">
-										<div className="flex text-amber-400 dark:text-amber-300 mb-4">
-											{[...Array(5)].map((_, i) => (
+							{testimonials.map((testimonial, index) => (
+								<div key={index} className="w-full flex-shrink-0 px-4">
+									<div className="bg-white dark:bg-slate-800 p-8 rounded-2xl shadow-sm">
+										<div className="flex items-center gap-1 text-amber-400 mb-6">
+											{[...Array(testimonial.rating)].map((_, i) => (
 												<Star key={i} className="w-5 h-5 fill-current" />
 											))}
 										</div>
-										<p className="text-slate-500 dark:text-slate-400 mb-6">{testimonial.content}</p>
+										<blockquote className="text-lg text-slate-700 dark:text-slate-300 mb-6">
+											{testimonial.content}
+										</blockquote>
 										<div className="flex items-center">
-											<img src={testimonial.image} alt={testimonial.author} className="w-12 h-12 rounded-full mr-4" />
+											<div className="w-12 h-12 rounded-full bg-indigo-100 dark:bg-slate-700 flex items-center justify-center text-indigo-600 dark:text-indigo-400 font-semibold mr-4">
+												{testimonial.initials}
+											</div>
 											<div>
-												<h4 className="font-semibold text-slate-900 dark:text-slate-100">{testimonial.author}</h4>
-												<p className="text-sm text-slate-500 dark:text-slate-400">{testimonial.position}</p>
+												<div className="font-semibold text-slate-900 dark:text-white">{testimonial.author}</div>
+												<div className="text-sm text-slate-500 dark:text-slate-400">{testimonial.position}</div>
 											</div>
 										</div>
 									</div>
-								))}
-							</div>
+								</div>
+							))}
 						</div>
 					</div>
 
-					{/* Dots */}
-					<div className="flex justify-center space-x-2 mt-6">
+					<div className="flex justify-center gap-2 mt-8">
 						{testimonials.map((_, index) => (
 							<button
 								key={index}
-								className={`w-2 h-2 rounded-full transition-all ${
-									currentSlide === index ? 'bg-indigo-600 w-4' : 'bg-slate-300 dark:bg-slate-600'
-								}`}
 								onClick={() => setCurrentSlide(index)}
+								className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${
+									currentSlide === index ? 'bg-indigo-600 w-8' : 'bg-slate-300 dark:bg-slate-600 hover:bg-indigo-400'
+								}`}
+								aria-label={`Go to slide ${index + 1}`}
 							/>
 						))}
 					</div>
